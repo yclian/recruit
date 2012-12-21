@@ -38,7 +38,7 @@ app.use(function(req, res, next){
 });
 app.use(function(err, req, res, next){
   console.error(err.stack);
-  res.send(500, { error: 'Something blew up!' });
+  res.send(500, { "message": 'Something blew up!' });
 });
 
 app.listen(port, function() {
@@ -85,3 +85,8 @@ app.post('/resumes', function(req, res, next) {
   });
   res.send({ "message": "OK!" });
 });
+
+app.get('*', function(req, res) {
+  res.send(404, { "message": util.format('Cannot %s %s', req.method, req.url) });
+});
+
